@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1552556697 source:c:\users\lenovo\desktop\numerosromanos\main.cpp
+	<iostream>
+	<string>
+
+1552559412 source:c:\users\lenovo\desktop\trabajo laboratorio\numerosromanos\main.cpp
+	<iostream>
+	<string>
+	<conio.h>
+

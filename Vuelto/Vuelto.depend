@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1552658876 source:c:\users\lenovo\desktop\trabajo laboratorio\vuelto\main.cpp
+	<iostream>
+	<conio.h>
+	<string>
+

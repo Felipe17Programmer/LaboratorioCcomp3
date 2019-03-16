@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1552703154 source:c:\users\lenovo\desktop\trabajo laboratorio\calendario\main.cpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+
