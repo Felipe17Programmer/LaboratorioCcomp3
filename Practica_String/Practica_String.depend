@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1553074961 source:c:\users\lenovo\desktop\trabajo laboratorio\practica_string\main.cpp
+	<iostream>
+	<string.h>
+

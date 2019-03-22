@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1553046212 source:c:\users\lenovo\desktop\trabajo laboratorio\encriptacion\main.cpp
+	<iostream>
+	<fstream>
+	<cstdio>
+	<conio.h>
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+
