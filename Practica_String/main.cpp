@@ -1,5 +1,7 @@
 #include <iostream>
+#include <iomanip>
 #include <string.h>
+#include <math.h>
 
 using namespace std;
 
@@ -12,64 +14,113 @@ string reverseString(string cadena){
 }
 
 int buscarCadenas(string cadena, string cadenaBuscada){
-    int cont = 0;
-    int temp;
-    string cadTemp;
-    int i=0;
-    while(i<cadena.size()-1){
-        temp = cadena.find_first_of(cadenaBuscada,cadenaBuscada.size());
-        cont++;
-        i += cadenaBuscada.size();
-        cadTemp = cadena.substr(temp,cadena.size()-1);
+
+    int cont=0;
+    string temp = "";
+    while(true){
+        int pos = cadena.find(cadenaBuscada);
+        if(pos == string::npos){
+            break;
+        }
+        else{
+            temp = cadena.substr(pos,cadenaBuscada.size());
+            if(cadenaBuscada.compare(temp) == 0){
+                cont++;
+            }
+            cadena.replace(pos,1,"x");
+        }
     }
     return cont;
 }
 
-void imprimirLinea(int veces, string figura, int espacio){
-        string temp = " ";
-        string temp2 = "";
-        for(int j=0; j<espacio; j++){
-            temp += temp;
-        }
-        for(int j=0; j<veces; j++){
-            temp2 += figura;
-        }
-        temp += temp2;
-        cout<<temp<<endl;
+void espaciar(int veces){
+    string temp = "";
+    for(int i = 0; i< veces;i++){
+        temp += " ";
+    }
+    cout<<temp;
 }
+
 
 void imprimirRombo(int numero){
     string figura = "*";
-    int i=1;
-    int j = 1;
-    int t = numero-2;
-    int mitad = numero/2;
-    int j1 = mitad;
-    int t1 = 1;
+    int valorEspacio = numero/2;
+    int valorEspacioBM = 0;
+    int cont = 1;
+    int i=0;
 
-    while(i <= numero){
-        if(i<mitad+1){
-            if(i == 1){
-               imprimirLinea(j,"*",2);
-               j+=2;
-               j1--;
-            }else{
-                imprimirLinea(j,figura,j1);
-                j+=2;
-                j1--;
+    while(i < numero ){
+        if(i <= numero/2){
+            int valorI = (2*i)+1;
+            string temp2 = "";
+            for(int j=1; j<=valorI; j++){
+                temp2 += figura;
             }
-
+            if(valorEspacio == 0){  cout<<temp2<<endl; valorEspacio++;}
+            else{espaciar(valorEspacio--); cout<<temp2<<endl;}
         }
-        else if(i == mitad+1){
-            imprimirLinea(numero,figura,0);
-        }
-        else if(i>mitad+1){
-            imprimirLinea(t,figura,t1);
-            t-=2;
-            t1++;
+        else{
+            int valorI = ((2*i)+1)- (4*cont++);
+            string temp2 = "";
+            for(int j=valorI; j>=1; j--){
+                temp2 += figura;
+            }
+            espaciar(valorEspacio++);
+            cout<<temp2<<endl;
         }
         i++;
     }
+}
+
+void separandoStrings(string cadena, string separador){
+    string temp = "";
+    string contenedor = "";
+    while(true){
+        int pos = cadena.find(separador);
+        if(pos == string::npos){
+            break;
+        }
+        else{
+            cadena.replace(pos,separador.size(),"\n");
+        }
+    }
+    cout<<cadena<<endl;
+}
+
+void ordenarStrings(string cadena,int n){
+    int i=0;
+    while(i<n){
+        string palabra;
+        string temp = " ";
+        cout<<"Ingrese palabra: "; cin>>palabra;
+        temp+=palabra;
+        cadena.append(temp);
+        i++;
+    }
+
+    string cadenaS[3+n];
+    for(int i=0;i<3;i++){
+        int pos = cadena.find(" ");
+        if(pos == string::npos){
+            cadenaS[i]= cadena.substr(0,pos);
+            break;
+        }
+        else{
+
+            cadenaS[i]= cadena.substr(0,pos);
+            cadena.replace(0,pos+1,"");
+            cout<<cadena<<endl;
+        }
+    }
+
+    for(int i=0;i<3+n;i++){
+        cout<<cadenaS[i]<<" ";
+    }
+    cout<<endl;
+   /* for(int i=0;i<n;i++){
+        cout<<arrayS[i]<<" ";
+    }*/
+
 }
 
 int main()
@@ -100,7 +151,9 @@ int main()
     int cantidad = 0;
     cout<<"Ingrese un valor impar: ";
     cin>>cantidad;
-    imprimirRombo(cantidad);
+    if(cantidad % 2 == 0){
+        cout<<"No es un numero impar!!!"<<endl;
+    }else{imprimirRombo(cantidad);}
     cout<<endl;
 
     cout<<"-> 4.PALABRAS SEPARADAS POR PALABRAS"<<endl;
@@ -111,6 +164,7 @@ int main()
     getline(cin,cadena);
     cout<<"Ingrese un separador de texto: ";
     getline(cin,separador);
+    separandoStrings(cadena,separador);
     cout<<endl;
 
     cout<<"-> 5.PALABRAS PALINDROMES"<<endl;
@@ -125,8 +179,11 @@ int main()
 
     cout<<"-> 6.ORDENANDO CADENAS"<<endl;
     cadena = "";
-    cout<<"Ingrese una cadena de texto: ";
+    int n=0;
+    cout<<"Ingrese una cadena de texto ordenada: ";
     getline(cin,cadena);
+    cout<<"Ingrese la cantidad de palabras a agregar: "; cin>>n;
+    ordenarStrings(cadena,n);
     cout<<endl;
 
     return 0;
